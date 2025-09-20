@@ -30,13 +30,64 @@ cd fine-tuned-llama-2
 pip install -r requirements.txt
 ```
 
+## Scripts Overview
+
+This repository contains several Python scripts for different aspects of the fine-tuning process:
+
+1. **`fine_tune_llama_2.py`** - Main fine-tuning script
+2. **`inference_script.py`** - Run inference with your fine-tuned model
+3. **`monitor_training.py`** - Monitor training progress and GPU usage
+4. **`preprocess_data.py`** - Preprocess and format datasets for training
+
 ## Usage
 
-### Basic Usage
+### 1. Data Preprocessing
 
-Run the fine-tuning script:
+First, preprocess your dataset (optional if using the default dataset):
+```bash
+# Create a sample dataset for testing
+python preprocess_data.py --create_sample --output_file data/sample_dataset.jsonl --num_samples 1000
+
+# Process a custom JSONL file
+python preprocess_data.py --input_file data/my_data.jsonl --output_file data/processed_data.jsonl --file_type jsonl
+
+# Process a Hugging Face dataset
+python preprocess_data.py --dataset_name "mlabonne/guanaco-llama2-1k" --output_file data/processed_data.jsonl
+```
+
+### 2. Fine-tuning
+
+Run the main fine-tuning script:
 ```bash
 python fine_tune_llama_2.py
+```
+
+### 3. Monitor Training
+
+In a separate terminal, monitor your training progress:
+```bash
+# Start TensorBoard
+python monitor_training.py --tensorboard --open_browser
+
+# Monitor training files
+python monitor_training.py --monitor
+
+# Check GPU usage
+python monitor_training.py --gpu
+```
+
+### 4. Run Inference
+
+Test your fine-tuned model:
+```bash
+# Interactive chat mode
+python inference_script.py --model_path ./results --use_lora --interactive
+
+# Single prompt mode
+python inference_script.py --model_path ./results --use_lora --prompt "What is machine learning?"
+
+# Use merged model (after merging LoRA weights)
+python inference_script.py --model_path ./Llama-2-7b-chat-finetune_merged --interactive
 ```
 
 ### Configuration
