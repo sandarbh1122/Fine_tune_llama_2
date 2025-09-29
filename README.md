@@ -32,12 +32,11 @@ pip install -r requirements.txt
 
 ## Scripts Overview
 
-This repository contains several Python scripts for different aspects of the fine-tuning process:
+This repository contains the essential Python scripts for fine-tuning Llama 2:
 
 1. **`fine_tune_llama_2.py`** - Main fine-tuning script
 2. **`inference_script.py`** - Run inference with your fine-tuned model
-3. **`monitor_training.py`** - Monitor training progress and GPU usage
-4. **`preprocess_data.py`** - Preprocess and format datasets for training
+3. **`preprocess_data.py`** - Preprocess and format datasets for training
 
 ## Usage
 
@@ -62,21 +61,7 @@ Run the main fine-tuning script:
 python fine_tune_llama_2.py
 ```
 
-### 3. Monitor Training
-
-In a separate terminal, monitor your training progress:
-```bash
-# Start TensorBoard
-python monitor_training.py --tensorboard --open_browser
-
-# Monitor training files
-python monitor_training.py --monitor
-
-# Check GPU usage
-python monitor_training.py --gpu
-```
-
-### 4. Run Inference
+### 3. Run Inference
 
 Test your fine-tuned model:
 ```bash
@@ -90,7 +75,21 @@ python inference_script.py --model_path ./results --use_lora --prompt "What is m
 python inference_script.py --model_path ./Llama-2-7b-chat-finetune_merged --interactive
 ```
 
-### Configuration
+## Monitoring Training
+
+To monitor your training progress, you can use TensorBoard:
+
+```bash
+# Install TensorBoard if not already installed
+pip install tensorboard
+
+# Start TensorBoard (run in a separate terminal)
+tensorboard --logdir ./results/runs
+
+# Open http://localhost:6006 in your browser
+```
+
+## Configuration
 
 You can modify the following parameters in the script:
 
